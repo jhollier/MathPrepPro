@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+{% load static %}
+
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <link href="asset/mediaelementplayer.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+  </head>
+
+    <body>
+
+      <div class="container" style="padding:8px;background-color:#f0f0f0">
+        <a href={{front_end_url}}><img src={{banner_url}} style='height: 20%; width: 20%; object-fit: contain'></a>
+      </div>
+
+      <h3>Thank you for your PRO subscription!</h3>
+      <br>
+      <div>You will find any previous problems <a href="{{solutions_url}}">here</a>.</div>
+      <br>
+      <div>Look out for your first daily PRO problem tomorrow shortly after UTC-06 (6:00am Central).</div>
+      <br>
+      <div>Cheers!</div>
+      <div>- MPP</div>
+      <br>
+      <br>
+      <font color="#888888">
+        <div style="padding:8px;background-color:#f0f0f0;text-align:center;font-size:10px">
+          <div>© 2021 MathPrepPro</div>
+          <div>See an issue or have a suggestion? Please reach out and let us know!</div>
+          <div style="font-size:10px">No longer want to be a PRO member? Contact us to cancel at any time.</div>
+          <div style="font-size:10px">No longer want to recieve these problems? <a href={{unsub_url}}>Unsubscribe</a> anytime.</div>
+          <div>contact@mathpreppro.com</div>
+        </div>
+      </font>
+
+    </body>
+
+</html>

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+{% load static %}
+
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <link href="asset/mediaelementplayer.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+  </head>
+
+    <body>
+      <div class="container" style="padding:8px;background-color:#f0f0f0">
+        <a href={{front_end_url}}><img src={{banner_url}} style='height: 20%; width: 20%; object-fit: contain'></a>
+      </div>
+      <h3>Hey, here is your <a href="{{pro_detail_url}}">daily math prep problem</a>. Take a few minutes to try and solve it!</h3>
+      <br>
+      <div class="jumbotron">
+        <a href="{{pro_detail_url}}"><img src={{problem_image_url}}></a>
+      </div>
+
+      {% if pro %}
+        <h3>PRO solution:</h3>
+        <br>
+        <a href="https://www.youtube.com/watch?v={{video_url}}"><img src={{gif_url}}></a>
+        <!-- <a href={{pro_detail_url}}><img src={{gif_url}}></a> -->
+        <!-- <br> -->
+        <!-- <br> -->
+        <!-- <div>Find your previous problems <a href="{{solutions_url}}">here</a>.<div> -->
+        <br>
+        <br>
+        <div>Cheers!</div>
+        <div>- MPP</div>
+        <br>
+        <br>
+        <font color="#888888">
+          <div style="padding:8px;background-color:#f0f0f0;text-align:center;font-size:10px">
+            <div>© 2021 MathPrepPro</div>
+            <div>See an issue with your problem(ID: {{pk}}) or have a suggestion? Please reach out and let us know!</div>
+            <div style="font-size:10px">No longer want to ne a PRO member? <a href="https://www.mathpreppro.com/contact">Contact</a> us to cancel at any time.</div>
+            <div style="font-size:10px"><a href={{unsub_url}}>Unsubscribe</a> anytime.</div>
+            <div>contact@mathpreppro.com</div>
+          </div>
+        </font>
+
+      {% else %}
+      <br>
+      <br>
+      <div>Feeling like you might need the solution? Sign up for <a href={{pro_sign_up_url}}>PRO</a> and get detailed video solutions to this problem and all other problems you have previously received.</div>
+      <br>
+      <div>Cheers!</div>
+      <div>- MPP</div>
+      <br>
+      <br>
+      <font color="#888888">
+        <div style="padding:8px;background-color:#f0f0f0;text-align:center;font-size:10px">
+          <div>© 2021 MathPrepPro</div>
+          <div>See an issue with your problem(ID: {{pk}}) or have a suggestion? Please reach out and let us know!</div>
+          <div style="font-size:10px">No longer want to recieve these problems? <a href={{unsub_url}}>Unsubscribe</a> anytime.</div>
+          <div>contact@mathpreppro.com</div>
+        </div>
+      </font>
+
+      {% endif %}
+
+    </body>
+
+</html>

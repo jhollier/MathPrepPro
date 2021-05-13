@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+{% extends 'AppOne/pro_base.html' %}
+{% load static %}
+
+{% block body_block %}
+
+<script>
+  function myFunction() {
+      var answer = "{{problem_answer}}";
+      var change = document.getElementById("toggle");
+      if (change.innerHTML == "Show")
+      {
+          change.innerHTML = answer;
+      }
+      else {
+          change.innerHTML = "Show";
+      }
+  }
+</script>
+
+    <div class="container">
+      {% if pro %}
+        {% if show_problem %}
+          <br>
+          <br>
+          <div id="screenshot" class="jumbotron" style="width:700px; margin:0 auto;">
+            <h1>{{problem_name}}</h1>
+            <br>
+              {% if image_dir  %}
+                <img src="{% static image_dir %}" alt="No image bro!">
+                <br>
+                <br>
+              {% endif %}
+              {{problem_statement|safe}}
+          </div>
+          <br>
+          <div class="container" style="width:700px; margin:0 auto;">
+            <h5>Solution:</h5>
+            <button id="toggle" class="btn btn-outline-dark" onclick="myFunction()">Show</button>
+          </div>
+          <br>
+          <br>
+          <div class="container">
+            <!-- see dev itterations for vimeo sample here rather than youtube if needed -->
+            <div class="embed-responsive embed-responsive-16by9">
+              <!-- <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/v64KOxKVLVg?controls=0" ></iframe> -->
+              <iframe width="650" height="315" src="https://www.youtube.com/embed/{{problem_solution_url}}" frameborder="50" allow="autoplay; encrypted-media" allowfullscreen wmode=transparent></iframe>
+            </div>
+          <br>
+          <br>
+          <div class="container" style="width:800px; margin:0 auto;">
+            <a class='btn btn-primary' href="{% url 'pro_list' token=token %}" style="width:100%">Back to List</a>
+          </div>
+          <br>
+          <br>
+        {% else %}
+          <br>
+          <br>
+          <h4>You do not have access to this problem yet!</h4>
+        {% endif %}
+      {% else %}
+        <br>
+        <br>
+        <h4>You do not have a Pro subscription! Please sign up to see all of you previous daily problems.</h4>
+        <h4>->Insert a link here back to the front end.<-</h4>
+      {% endif %}
+    </div>
+
+
+    {% endblock %}

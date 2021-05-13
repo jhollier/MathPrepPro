@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+{% extends 'AppOne/pro_base.html' %}
+{% load static %}
+
+{% block body_block %}
+
+    <div class="container">
+      {% if pro %}
+        <br>
+        <h1>Your PRO Problems</h1>
+          <div class="jumbotron">
+            <ol>
+              {% for thing in problem_list %} <!-- Note that the context_object_name was set to 'problem_list' -->
+              <h2><li><a href="{% url 'pro_detail' token=token pk=thing.id %}">{{thing.problem_name}}</a></li></h2> <!-- defaults IDs are set for each model object created and we can call those -->
+              {% endfor %}
+            </ol>
+          </div>
+      {% else %}
+        <br>
+        <br>
+        <h4>You do not have a Pro subscription! Please sign up to see all of you previous daily problems.</h4>
+        <h4>->Insert a link here back to the front end.<-</h4>
+      {% endif %}
+    </div>
+
+{% endblock %}
+
+<!-- token=token pk=thing.id -->

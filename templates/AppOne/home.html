@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+{% extends "AppOne/base.html" %}
+{% load static %}
+
+{% block body_block %}
+
+  {% if user.is_staff %}
+
+  <div class="container">
+    <div class="jumbotron" style="padding:8px;background-color:#f0f0f0;text-align: center;">
+      <img src={% static 'images/admin/email_banner.png' %} style='height: 35%; width: 35%; object-fit: contain'>
+    </div>
+  </div>
+
+  <div>
+    <h1>Resource Links:</h1>
+    <ul>
+      <li><a href="https://www.mathjax.org/">MathJax</a></li>
+      <li>Exmaple 2</li>
+    </ul>
+  </div>
+    <!-- Example mathjax equation! -->
+    <p>
+      When \(a \ne 0\), there are two solutions to \(ax^2 + bx + c = 0\) and they are
+      \[x = {-b \pm \sqrt{b^2-4ac} \over 2a}.\]
+    </p>
+  {% else %}
+    No Auth
+  {% endif %}
+
+{% endblock %}

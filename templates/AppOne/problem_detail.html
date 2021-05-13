@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+{% extends 'AppOne/base.html' %}
+{% load static %}
+{% block body_block %}
+
+<!-- Note about the 'escape' and 'safe' filter:
+If we want the injected text to behave as html, we do not want to 'escape' it.
+By default, autoescape is on. To allow injected text to be treated as html
+by calling the 'safe' filter. -->
+
+    <div class="container">
+      <div class="jumbotron" style="width:700px; margin:0 auto;">
+        {% if user.is_staff %}
+          <h1>{{problem_name}}</h1>
+          <br>
+          {% if image_dir  %}
+            <img src="{% static image_dir %}" alt="No image bro!">
+            <br>
+            <br>
+          {% endif %}
+          {{problem_statement|safe}}
+          </div>
+          <div class="embed-responsive embed-responsive-16by9">
+            <iframe width="650" height="315" src="https://www.youtube.com/embed/{{problem_solution_url}}" frameborder="50" allow="autoplay; encrypted-media" allowfullscreen wmode=transparent></iframe>
+          </div>
+          <div class="container">
+          <a class='btn btn-primary' href="{% url 'problem_list' %}">Back</a>
+          <a class='btn btn-warning' href="{% url 'update' pk=pk %}">Update</a>
+          <br>
+          <br>
+          <p>Solution: {{problem_answer}}</p>
+          <p>ID: {{pk}}</p>
+      </div>
+      {% else %}
+        <p>No Auth.</p>
+      {% endif %}
+    </div>
+
+    <!-- Bootstrap for embeded youtube video -->
+    <!-- <div class="embed-responsive embed-responsive-16by9">
+      <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/zpOULjyy-n8?rel=0" allowfullscreen></iframe>
+    </div> -->
+
+{% endblock %}

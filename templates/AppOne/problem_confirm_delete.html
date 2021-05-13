@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+{% extends 'AppOne/base.html' %}
+{% block body_block %}
+
+
+  {% if user.is_staff %}
+  <h1>Confirm Deletion of Problem: {{problem.problem_name}}?</h1>
+  <h1>Problem ID: {{problem.pk}}</h1>
+  <form method="post">
+    {% csrf_token %}
+    <input type="submit" class='btn btn-danger' value="Delete">
+    <a class='btn btn-primary' href="{% url 'update' pk=problem.pk %}">Back</a>
+  </form>
+  {% else %}
+  <h1>Access Error: You do not have permission. Please login as admin.</h1>
+  {% endif %}
+
+{% endblock %}

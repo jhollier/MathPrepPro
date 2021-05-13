@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+{% extends 'AppOne/base.html' %}
+{% load static %}
+{% block body_block %}
+
+  {% if user.is_staff %}
+    <div class="container">
+      <h1>
+        <!-- Check to see if the primary key of the model isntance exists and set the heading appropriately -->
+        {% if not form.instance.pk %}
+        Create Problem
+        {% else %}
+        Update Problem
+        {% endif %}
+      </h1>
+    </div>
+    <div class="container">
+      <div class="jumbotron">
+        <form method="post">
+          {% csrf_token %}
+          {% if form.instance.pk %}
+            <img src="{% static image_dir %}" alt="No image bro!">
+            <br>
+            <br>
+          {% endif %}
+          {{ form.as_p }}
+          {% if form.instance.pk %}
+            <p>ID: {{pk}}</p>
+            <p>Don't forget to add the url as an embeded link.</p>
+            <p>Use admin backend for adding the Problem Statement Image.</p>
+            <p>Clear cache in order to see Image Preview Below - "chrome://settings/clearBrowserData".</p>
+            <p>http://hostmath.com/</p>
+          {% endif %}
+          <input type="submit" class="btn btn-primary" value="Submit & Preview">
+          <a class='btn btn-primary' href="{% url 'problem_list' %}">Back</a>
+          <!-- Show delete button only if a problem exists -->
+          {% if form.instance.pk %}
+            <a class='btn btn-danger' href="{% url 'delete' pk=problem.pk %}">Delete</a>
+          {% endif %}
+        </form>
+      </div>
+
+      {% if form.instance.pk %}
+        <h3>Web Preview</h3>
+        <div id="screenshot" class="jumbotron" style="width:700px; margin:0 auto;">
+          <!-- <h1>{{problem_name}}</h1> -->
+          {% if image_dir  %}
+            <img src="{% static image_dir %}" alt="No image bro!">
+            <br>
+            <br>
+          {% endif %}
+          {{problem_statement|safe}}
+        </div>
+        <br>
+      {% endif %}
+
+      {% if form.instance.pk %}
+        {% if user.is_staff %}
+            <h3>Email Image Preview</h3>
+            <!-- <div>
+              <p>I could not figure out how to cache bust so the image will not update if it has already been loaded before. This would be a nice to have feature for now.</p>
+              <p>Seems like there might be a good javascript method but I couldn't figure out how to do it with tempalte tags as well in the img src</p>
+              <p>https://stackoverflow.com/questions/47916116/how-to-concatenate-javascript-variable-in-html-image-source-tag/47916223</p>
+              <p>Workaround: chrome://settings/clearBrowserData?search=cache</p>
+            </div> -->
+            <br>
+            <div style="width:700px; margin:0 auto;">
+              <img src="{{ STATIC_URL }}/static/images/problems/{{ pk }}_statement.png?v=2" alt="No image. Submit & Refresh.">
+            </div>
+            <br>
+        {% endif %}
+      {% endif %}
+
+  {% else %}
+    No Auth
+  {% endif %}
+
+{% endblock %}

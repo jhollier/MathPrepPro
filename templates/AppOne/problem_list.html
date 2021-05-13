@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+{% extends 'AppOne/base.html' %}
+{% block body_block %}
+
+  {% if user.is_staff %}
+    <div class="container">
+      <h1>Porblem List.</h1>
+      <a class='btn btn-primary' href="{% url 'create' %}">Create New Problem</a>   <!-- Show creation button only if staff: https://docs.djangoproject.com/en/1.8/ref/contrib/auth/#django.contrib.auth.models.User.is_staff -->
+      <ol>
+        {% for thing in problem_list %} <!-- Note that the context_object_name was set to 'problem_list' -->
+          <h2><li><a href="{{thing.id}}">{{thing.problem_name}} - {{thing.pk}}</a></li></h2> <!-- defaults IDs are set for each model object created and we can call those -->
+        {% endfor %}
+      </ol>
+    </div>
+  {% else %}
+  No Auth
+  {% endif %}
+
+{% endblock %}
